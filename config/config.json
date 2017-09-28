@@ -1,0 +1,23 @@
+{
+  "port": 3001,
+  "mongoose": {
+    "uri": "mongodb://localhost/forum",
+    "options": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      },
+      "useMongoClient": true
+    }
+  },
+  "session": {
+    "secret": "any secret key",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": null
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<% layout('../layouts/page') %>
+<% block('title', 'create user') %>
+
+<form action="/users/new" id='new_user' method="POST" >
+    <div>
+        <label for='username'>username</label>
+        <input type="text" id='username' name='username'}>
+    </div>
+    <div>
+        <label for='email'>email</label>
+        <input type="text" id='email' name='email'}>
+    </div>
+    <div>
+        <label for='password'>password</label>
+        <input type="text" id='password' name='password'>
+    </div>
+
+    <input type="submit" value='create'>
+</form>

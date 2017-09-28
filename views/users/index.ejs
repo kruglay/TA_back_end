@@ -1,0 +1,10 @@
+<% layout('../layouts/page') %>
+<% block('title', 'USERS') %>
+<ul>
+    <% users.forEach(function(user, i){ %>
+    <li>
+        <span> <%= user.username %> <%- user.email %> <%- user.password %> </span>
+    </li>
+    <%});%>
+</ul>
+

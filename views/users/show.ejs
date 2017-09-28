@@ -1,0 +1,7 @@
+<% layout('../layouts/page') %>
+<% block('title', 'USER') %>
+<ul>
+    <li>
+        <span> <%= user.username %> <%- user.email %> <%- user.password %> </span>
+    </li>
+</ul>
