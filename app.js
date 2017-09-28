@@ -37,7 +37,6 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('helpers', helpers)
 
 app.use('/', index);
 app.use('/users', users);
