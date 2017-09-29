@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var sessions = require('./routes/sessions')
 var helpers = require('./middleware/helpers')
+var loadUser = require('./middleware/loadUser')
 
 
 var app = express();
@@ -36,11 +37,14 @@ app.use(session({
   cookie: config.get('session:cookie'),
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(loadUser)
 app.use('/', index);
 app.use('/users', users);
 app.use('/sessions', sessions);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

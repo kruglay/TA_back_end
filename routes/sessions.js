@@ -11,7 +11,7 @@ router.post('/new', (req, res, next) => {
   User.authenticate(data)
     .then(
       user => {
-        req.session.user = user
+        req.session.user_id = user._id.toString()
         res.redirect(`/users/${user.username}`)
       }
     )
@@ -19,6 +19,11 @@ router.post('/new', (req, res, next) => {
       console.error(err)
       next(err)
     })
+})
+
+router.post('/destroy', (req, res, next)=> {
+  req.session.destroy();
+  res.redirect('/')
 })
 
 module.exports = router
