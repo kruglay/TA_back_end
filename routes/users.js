@@ -1,20 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user')
+const path = require('path')
+// const controller = require(`/controllers/${path.parse(module.filename).name}`)
+const controller = require('../controllers/users')
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  console.log("users")
-  User.find({}).exec()
-    .then((users) => {
-      console.log(users)
-      res.render('users/index', { users: users })
-    })
-    .catch((err) => {
-      res.statusCode = 404
-      console.log(err)
-    });
-});
+router.get('/', controller.get);
 
 router.post('/new', (req, res, next) => {
   console.log("create user")

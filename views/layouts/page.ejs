@@ -11,7 +11,10 @@
 <% if (user) { %>
 <div>
     <a href='/users/<%=user.username%>'>Hello <%=user.username%></a>
-    <a href='/sessions/destroy'>Log out</a>
+    <form action="/sessions/destroy" method="post">
+        <input type="submit" value='log out'}>
+    </form>
+
 </div>
 <% } else { %>
 <div>

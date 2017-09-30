@@ -15,6 +15,7 @@ var users = require('./routes/users');
 var sessions = require('./routes/sessions')
 var helpers = require('./middleware/helpers')
 var loadUser = require('./middleware/loadUser')
+var router = require('./routes/index')
 
 
 var app = express();
@@ -41,9 +42,10 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(loadUser)
-app.use('/', index);
-app.use('/users', users);
-app.use('/sessions', sessions);
+app.use(router)
+// app.use('/', index);
+// app.use('/users', users);
+// app.use('/sessions', sessions);
 
 
 // catch 404 and forward to error handler
@@ -56,6 +58,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  console.error(err)
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
