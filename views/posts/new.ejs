@@ -1,0 +1,12 @@
+<% layout('/layouts/page') %>
+<form action="/posts/new" method="post" id="new_post"}>
+    <div>
+        <label for="title">title:</label>
+        <input type="text" name="title" id="title"}>
+    </div>
+    <div>
+        <label for="text">text:</label>
+        <input type="text" name="text" id="text"}>
+    </div>
+    <input type="submit" value="create">
+</form>

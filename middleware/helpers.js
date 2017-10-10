@@ -1,6 +1,6 @@
-
 module.exports = {
-  say(word) {
-    return word
+  addAlertMessage(req, res, next) {
+    res.locals.alert = ''
+    next()
   }
 }

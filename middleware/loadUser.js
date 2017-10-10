@@ -1,14 +1,18 @@
 const User = require('../models/user')
 
 module.exports = function(req, res, next) {
-  console.log("req.session.user_id", req.session.user_id)
+  res.locals.isAuthenticate = false
   req.user = res.locals.user = null
   if (!req.session.user_id) return next()
-  User.findById(req.session.user_id, (err, user) => {
-    console.log(2)
-    if (err) next(err)
+
+  User.findById(req.session.user_id).exec()
+    .then((user) => {
     res.locals.user = user
+    res.locals.isAuthenticate = true
     req.user = user
-    return next()
-  })
+    next()
+    })
+    .catch((err) => {
+      next(err)
+    })
 }

@@ -40,7 +40,7 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(helpers.addAlertMessage)
 app.use(loadUser)
 app.use(router)
 // app.use('/', index);

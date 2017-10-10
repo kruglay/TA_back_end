@@ -8,6 +8,12 @@
     <title><%= blocks.title %></title>
 </head>
 <body>
+<% if(alert) { %>
+    <div>
+        <%= alert %>
+    </div>
+<% } %>
+
 <% if (user) { %>
 <div>
     <a href='/users/<%=user.username%>'>Hello <%=user.username%></a>

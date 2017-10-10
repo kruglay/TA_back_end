@@ -1,0 +1,10 @@
+<% layout('../layouts/page') %>
+<% block('title', 'USERS') %>
+<ul>
+    <% posts.forEach(function(post, i){ %>
+    <li>
+        <span> <%= post.title %> <%- post.text %> </span>
+    </li>
+    <%});%>
+</ul>
+
