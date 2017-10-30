@@ -8,10 +8,22 @@ const schema = new Schema({
   },
   title: {
     type: String,
-    required: true
+
   },
   text: {
-    type: String
+    type: String,
+    required: () => (!this.isTheme)
+  },
+  order: {
+    type: Number,
+    required: true
+  },
+  parent: {
+    type: Schema.Types.ObjectId,
+    required: () => (this.order > 0)
+  },
+  isTheme: {
+    type: Boolean
   }
 })
 

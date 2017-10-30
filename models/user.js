@@ -28,17 +28,16 @@ class UserClass {
   static authenticate({ username, password, next }) {
     return this
       .findOne({username: username})
-      .exec((err, user) => {
-        if (err) {
-          throw err
-        } else if(!user) {
-          err = new Error('User not found')
+      .exec()
+      .then((user) => {
+        if(!user) {
+          let err = new Error('User not found')
           throw err
         }
         if (user.password === this.encriptPassword(password)) {
           return user
         } else {
-          err = new Error('Wrong password')
+          let err = new Error('Wrong password')
           throw err
         }
       })

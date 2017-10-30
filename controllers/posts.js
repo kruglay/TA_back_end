@@ -2,10 +2,11 @@ const Post = require('../models/post');
 
 exports.index = function(req, res, next) {
   console.log('get posts');
-  Post.find({})
-    .then((docs) => {
-      console.log(docs);
-      res.render('posts/index', { title: 'test posts', posts: docs })
+  let orders = body.orders
+  Post.find({order: {$in: orders}})
+    .then((posts) => {
+      console.log(posts);
+      res.json(posts)
     })
     .catch((err) => { console.err(err) })
 }
@@ -13,26 +14,26 @@ exports.index = function(req, res, next) {
 exports.new = function(req, res, next) {
   console.log('get posts');
   let alert = ''
-  if(!res.isAuthenticate) {
+  if(!res.locals.isAuthenticate) {
     alert = 'Only authenticated person can add post'
   }
   res.render('posts/new', { alert })
 }
 
 exports.create = function(req, res, next) {
-  if(!res.isAuthenticate) {
+  if(!res.locals.isAuthenticate) {
     let alert = 'Only authenticated person can add post'
-    res.render('/posts/new', { alert })
+    return res.render('posts/new', { alert })
   }
-  const {text, title, user} = req.body
+  const {text, title} = req.body
   let post = {
     text,
     title,
-    user
+    user: req.user
   }
   Post
     .create(post)
-    .then(res.redirect('/posts/index'))
+    .then(res.redirect('/posts'))
     .catch((err)=>{
       next(err)
     })
@@ -41,7 +42,7 @@ exports.create = function(req, res, next) {
 exports.delete = function(req, res, next) {
   if(!res.isAuthenticate) {
     let alert = 'Only authenticated person can add post'
-    res.render('/posts/new', { alert })
+    res.render('posts/new', { alert })
   }
   let params = req.body
   Post.findByIdAndRemove(params.id).exec()

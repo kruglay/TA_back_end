@@ -3,7 +3,7 @@
 <ul>
     <% posts.forEach(function(post, i){ %>
     <li>
-        <span> <%= post.title %> <%- post.text %> </span>
+        <span> <%= post.title %> <%- post.text %> <%= post.user %></span>
     </li>
     <%});%>
 </ul>

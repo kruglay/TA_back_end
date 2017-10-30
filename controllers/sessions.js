@@ -6,11 +6,16 @@ module.exports.new = (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   let data = req.body
-  User.authenticate(data)
+  const { username, password } = data
+  User.authenticate({username, password, next})
     .then(
       user => {
         req.session.user_id = user._id.toString()
-        res.redirect(`/users/${user.username}`)
+        // res.redirect(`/users/${user.username}`)
+        res.json({
+          email: user.email,
+          username: user.username
+        })
       }
     )
     .catch((err) => {

@@ -19,7 +19,10 @@ exports.show = function(req, res, next) {
   User.findOne({ username: params.username })
     .exec()
     .then((user) => {
-      res.render('users/show', { user })
+      res.json({
+        email: user.email,
+      })
+      // res.render('users/show', { user })
     })
     .catch(err => next(err))
 }
