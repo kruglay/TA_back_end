@@ -2,7 +2,8 @@ const Post = require('../models/post');
 
 exports.index = function(req, res, next) {
   console.log('get posts');
-  let orders = body.orders
+  let orders = req.query.orders.split(',').map(Number)
+  console.log(orders)
   Post.find({order: {$in: orders}})
     .then((posts) => {
       console.log(posts);

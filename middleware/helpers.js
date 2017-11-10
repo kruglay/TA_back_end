@@ -11,7 +11,7 @@ module.exports = {
         'Access-Control-Max-Age': 86400
       })
       res.status(200)
-      res.send()
+      return res.send()
     }
     next()
   },

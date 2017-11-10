@@ -4,7 +4,11 @@ module.exports = function(req, res, next) {
   res.locals.isAuthenticate = false
   req.user = res.locals.user = null
   if (!req.session.user_id) {
-    res.json({isAuthenticate: false})
+    // if (req.method === 'POST' && req.path === '/sessions/new') {
+    //   return next()
+    // }
+    // res.json({isAuthenticate: false})
+    next()
   } else {
     User.findById(req.session.user_id).exec()
       .then((user) => {
