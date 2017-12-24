@@ -41,9 +41,6 @@ class UserClass {
           throw err
         }
       })
-      .catch(
-        (err) => next(err)
-      )
   }
 }
 
