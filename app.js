@@ -7,12 +7,9 @@ var bodyParser = require('body-parser');
 var config = require('./config')
 var ejs = require('ejs')
 var mongoose = require('./lib/mongoose')
-var session = require('express-session')
-var MongoStore = require('connect-mongo')(session);
+// var session = require('express-session')
+// var MongoStore = require('connect-mongo')(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var sessions = require('./routes/sessions')
 var helpers = require('./middleware/helpers')
 var loadUser = require('./middleware/loadUser')
 var router = require('./routes/index')
@@ -32,12 +29,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-  secret: config.get('session:secret'),
-  key: config.get('session:key'),
-  cookie: config.get('session:cookie'),
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-}));
+// app.use(session({
+//   secret: config.get('session:secret'),
+//   key: config.get('session:key'),
+//   cookie: config.get('session:cookie'),
+//   store: new MongoStore({ mongooseConnection: mongoose.connection }),
+// }));
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helpers.addAlertMessage)

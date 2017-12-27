@@ -1,4 +1,7 @@
 const User = require('models/user')
+const jwt = require('jsonwebtoken')
+const Store = require('models/store')
+const config = require('config')
 
 exports.get = function (req, res, next) {
   console.log("users")
@@ -35,10 +38,26 @@ exports.create = function (req, res, next) {
     password: req.body.password,
   }
   User.create(user)
-    .then(res.redirect('/users'))
+    // .then(res.redirect('/users'))
+    .then(user=>{
+      let token = jwt.sign({
+        user: user._id.toString(),
+        username: user.username,
+      }, config.get('jwt:secret'), {expiresIn: '1d'})
+      Store.create({user: user._id, token})
+        .then(store=>{
+          res.json({
+            result:'success',
+            token: token
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          res.json({result:'success'})
+        })
+    })
     .catch((err) => {
       console.error(err)
-      // res.render('users/new')
       next(err)
     })
 }

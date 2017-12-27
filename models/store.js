@@ -6,14 +6,10 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
-  title: {
-    type: String,
-
-  },
-  text: {
+  token: {
     type: String,
     required: true
-  },
+  }
 })
 
-module.exports = mongoose.model('Post', schema)
+module.exports = mongoose.model('Store', schema)

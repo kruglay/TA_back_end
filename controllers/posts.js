@@ -2,9 +2,8 @@ const Post = require('../models/post');
 
 exports.index = function(req, res, next) {
   console.log('get posts');
-  let orders = req.query.orders.split(',').map(Number)
-  console.log(orders)
-  Post.find({order: {$in: orders}})
+  // Post.find({order: {$in: orders}})
+  Post.find()
     .then((posts) => {
       console.log(posts);
       res.json(posts)
@@ -22,9 +21,10 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) {
+  console.log('exports.create')
   if(!res.locals.isAuthenticate) {
     let alert = 'Only authenticated person can add post'
-    return res.render('posts/new', { alert })
+    return res.json({result: 'fail', error: 'Only authenticated person can add post'})
   }
   const {text, title} = req.body
   let post = {
@@ -32,9 +32,21 @@ exports.create = function(req, res, next) {
     title,
     user: req.user
   }
+  console.log(post)
   Post
     .create(post)
-    .then(res.redirect('/posts'))
+    .then(post => {
+      if (!post) {
+        return res.json({result: 'fail'})
+      }
+      res.json({
+        result: 'success',
+        info: {
+          type: 'info',
+          message: 'message added'
+        }
+      })
+    })
     .catch((err)=>{
       next(err)
     })

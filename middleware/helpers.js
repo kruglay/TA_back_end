@@ -17,6 +17,7 @@ module.exports = {
   },
   anyRequest(req, res, next) {
     let origin = req.get('Origin')
+    res.set({'Access-Control-Allow-Credentials': true})
     if(req.get('Origin') !== undefined) {
       res.set('Access-Control-Allow-Origin',origin)
     }
