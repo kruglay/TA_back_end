@@ -2,11 +2,10 @@ const Post = require('../models/post');
 
 exports.index = function(req, res, next) {
   console.log('get posts');
-  // Post.find({order: {$in: orders}})
   Post.find()
     .then((posts) => {
       console.log(posts);
-      res.json(posts)
+      res.json(posts.map(({user, title, text}) => ({user, title, text})))
     })
     .catch((err) => { console.err(err) })
 }

@@ -18,7 +18,7 @@ module.exports.create = (req, res, next) => {
           user: user._id.toString(),
           username: user.username,
         }, config.get('jwt:secret'), {expiresIn: '1d'})
-        Store.findOneAndUpdate({user: user._id}, {token})
+        Store.findOneAndUpdate({user: user._id}, {user: user._id, token}, {upsert: true})
           .then((doc) => {
               res.json({
                 result: 'success',
@@ -41,6 +41,12 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next)=> {
-  req.session.destroy();
-  res.redirect('/')
+  Store
+    .findOneAndRemove({user: req.user._id})
+    .then(()=>{res.json({result: 'success'})})
+    .catch(err=>{
+      console.error(err)
+      res.json({result: 'fail'})
+      next(err)
+    })
 }
