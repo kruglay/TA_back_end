@@ -48,7 +48,8 @@ exports.create = function (req, res, next) {
         .then(store=>{
           res.json({
             result:'success',
-            token: token
+            token: token,
+            user: user._id.toString(),
           })
         })
         .catch(error => {

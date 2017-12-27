@@ -23,6 +23,7 @@ module.exports.create = (req, res, next) => {
               res.json({
                 result: 'success',
                 username: user.username,
+                user: user._id.toString(),
                 token
               })
             }

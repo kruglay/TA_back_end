@@ -12,7 +12,6 @@
     }
   },
   "jwt": {
-    "secret": "any secret key",
-    "expires": "1d"
+    "secret": "any secret key"
   }
 }

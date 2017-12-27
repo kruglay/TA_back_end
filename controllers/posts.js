@@ -21,7 +21,6 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) {
-  console.log('exports.create')
   if(!res.locals.isAuthenticate) {
     let alert = 'Only authenticated person can add post'
     return res.json({result: 'fail', error: 'Only authenticated person can add post'})

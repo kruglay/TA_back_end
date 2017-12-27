@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config')
 var ejs = require('ejs')
-var mongoose = require('./lib/mongoose')
+// var mongoose = require('./lib/mongoose')
 // var session = require('express-session')
 // var MongoStore = require('connect-mongo')(session);
 
